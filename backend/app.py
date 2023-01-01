@@ -7,6 +7,7 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 
 from util.my_logger import my_logger
+from provider.baseball_scrapper import get_baseball_rank
 
 # instantiate the app
 app = Flask(__name__)
@@ -28,7 +29,7 @@ def health_check():
     return jsonify('good')
 
 
-@app.route('/main_btn',methods=['GET'])
+@app.route('/main_btn', methods=['GET'])
 def main_btn():
     my_logger.info("click Main Btn")
     data = []
@@ -46,6 +47,13 @@ def main_btn():
         data.append(result_dict)
 
     return jsonify(data)
+
+
+@app.route('/baseball_data', methods=['GET'])
+def baseball_data():
+    my_logger.info("baseball_data route!!")
+    data_list = get_baseball_rank()
+    return jsonify(data_list)
 
 
 if __name__ == '__main__':

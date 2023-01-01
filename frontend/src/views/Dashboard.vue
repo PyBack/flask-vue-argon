@@ -11,6 +11,17 @@
     </ul>
 	</div>
 </div>
+<div>
+  <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
+      <!-- Card stats -->
+  </base-header>
+  <!-- my code -->
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <my-little-div></my-little-div>
+    </div>
+  </div>
+</div>
   <div class="py-4 container-fluid">
     <div class="row">
       <div class="col-lg-12">
@@ -141,6 +152,9 @@ import BR from "@/assets/img/icons/flags/BR.png";
 // axios
 import axios from 'axios';
 
+// my code
+import MyLittleDiv from "./MyLittleDiv/MyLittleDiv.vue";
+
 export default {
   name: "dashboard-default",
   data() {
@@ -219,6 +233,7 @@ export default {
     GradientLineChart,
     Carousel,
     CategoriesCard,
+    MyLittleDiv,
   },
   methods:{
     getMyData(){
@@ -241,6 +256,9 @@ export default {
   },
   created() {
     this.getMyData();
+  },
+  mounted() {
+
   },
 };
 </script>
