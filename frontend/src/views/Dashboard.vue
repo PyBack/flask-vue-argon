@@ -1,4 +1,16 @@
 <template>
+<div class="row">
+	<div class="col-md-12">
+	    <h1>My Test</h1>
+	    <button type="button" class="btn btn-success btn-sm" v-on:click="getRanStr">{{my_data}}</button>
+	    <hr>
+      <ul>
+        <li v-for="(msg,index) in ran_str" :key="index">
+            {{ msg.key }}
+        </li>
+    </ul>
+	</div>
+</div>
   <div class="py-4 container-fluid">
     <div class="row">
       <div class="col-lg-12">
@@ -126,6 +138,9 @@ import DE from "@/assets/img/icons/flags/DE.png";
 import GB from "@/assets/img/icons/flags/GB.png";
 import BR from "@/assets/img/icons/flags/BR.png";
 
+// axios
+import axios from 'axios';
+
 export default {
   name: "dashboard-default",
   data() {
@@ -195,6 +210,8 @@ export default {
           flag: BR,
         },
       },
+      my_data: '',
+      ran_str: [],
     };
   },
   components: {
@@ -202,6 +219,28 @@ export default {
     GradientLineChart,
     Carousel,
     CategoriesCard,
+  },
+  methods:{
+    getMyData(){
+        let path = "http://" + window.location.hostname + ":5000/";
+        axios.get(path).then((res) => {
+            this.my_data = res.data;
+        }).catch((error) => {
+            console.error(error);
+        });
+    },
+    getRanStr(){
+      let path = "http://" + window.location.hostname + ":5000/main_btn";
+      axios.get(path).then((res) => {
+        this.ran_str = res.data;
+        console.log(res.data);
+      }).catch((error) => {
+        console.error(error);
+      }); 
+    },
+  },
+  created() {
+    this.getMyData();
   },
 };
 </script>
