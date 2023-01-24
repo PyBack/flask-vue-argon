@@ -6,6 +6,8 @@
 
 *.pyc
 
+# data file
+/mysql-data
 
 # local env files
 /frontend/.env.local
